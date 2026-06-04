@@ -25,17 +25,14 @@ app.get("/", (req, res) => {
 // =====================
 // MONGODB CONNECTION
 // =====================
-mongoose.connect(
-    "mongodb+srv://anurkush1234_db_user:Anurag123@cluster0.ke2hsu1.mongodb.net/notesDB?retryWrites=true&w=majority"
-)
+mongoose
+    .connect(process.env.MONGO_URL)
     .then(() => {
         console.log("MongoDB Connected");
 
-        // server only starts after DB connection
-        app.listen(5000, () => {
-            console.log("Server running on port 5000");
+        app.listen(process.env.PORT || 5000, () => {
+            console.log("Server running");
         });
-
     })
     .catch((err) => {
         console.log("MongoDB Connection Error:", err);
